@@ -1,5 +1,10 @@
 package homework8;
 
+import homework8.abstractclasses.Shape;
+import homework8.threedimensional_shapes.Cube;
+import homework8.threedimensional_shapes.Cylinder;
+import homework8.twodimensional_shapes.*;
+
 public class GraphicRedactor {
     public static void main(String[] args) {
         Shape circle;
@@ -8,34 +13,53 @@ public class GraphicRedactor {
         Shape rectangle;
         Shape trapeze;
 
+        Shape cube;
+        Shape cylinder;
+
+        Shape circleRadial;
+
         try {
             circle = new Circle("circle1", 0, 0, 5);
             quad = new Quad("quad1", 10, 10);
             triangle = new Triangle("triangle1", 3, 4, 5);
             rectangle = new Rectangle("rectangle1", 8, 6);
             trapeze = new Trapeze("trapeze1", 5, 10, 8);
+
+            cube = new Cube("cube1", 8, 8, 8);
+            cylinder = new Cylinder("cylinder1", 4, 10);
+
+            circleRadial = new RadialCircle("circle2", 45, 10);
+
         } catch (InappropriateParameterException e) {
             System.out.println(e.getMessage());
             return;
         }
+        ShapeDrawer shapeDrawer = new ShapeDrawer();
+        ShapeDyer shapeDyer = new ShapeDyer();
+        ShapeCleaner shapeCleaner = new ShapeCleaner();
 
-        getShapesName(circle, quad, triangle, rectangle, trapeze);
-
-        System.out.println("---------------------");
-
-        drawShapes(circle, quad, triangle, rectangle, trapeze);
-
-        System.out.println("---------------------");
-        System.out.println(circle.dye());
-        dyeShapes("blue", quad, triangle);
-        dyeShapes("green", rectangle, trapeze);
+        getShapesName(circle, quad, triangle, rectangle, trapeze, cube, cylinder, circleRadial);
 
         System.out.println("---------------------");
 
-        clearShapes(circle, quad, triangle, rectangle, trapeze);
+        drawShapes(shapeDrawer, circle, quad, triangle, rectangle, trapeze, cube, cylinder, circleRadial);
 
         System.out.println("---------------------");
 
+        System.out.println(shapeDyer.dye(circle));
+
+        dyeShapes(shapeDyer, "blue", "red", quad, triangle);
+
+        dyeShapes(shapeDyer, "yellow", "green", rectangle, trapeze, cube);
+
+        System.out.println("---------------------");
+
+        clearShapes(shapeCleaner, circle, quad, triangle, rectangle, trapeze, cube, cylinder, circleRadial);
+
+        System.out.println("---------------------");
+
+        System.out.println("Rectangle is " + rectangle.getType());
+        System.out.println("Cube is " + cube.getType());
     }
 
     public static void getShapesName(Shape... shapes) {
@@ -44,21 +68,24 @@ public class GraphicRedactor {
         }
     }
 
-    public static void drawShapes(Shape... shapes) {
+    public static void drawShapes(ShapeDrawer shapeDrawer, Shape... shapes) {
         for (Shape shape : shapes) {
-            shape.draw();
+            shapeDrawer.draw(shape);
         }
     }
 
-    public static void dyeShapes(String color, Shape... shapes) {
+    public static void dyeShapes(ShapeDyer shapeDyer, String fillerColor, String borderColor, Shape... shapes) {
         for (Shape shape : shapes) {
-            shape.dye(color);
+            shapeDyer.setShape(shape);
+            shapeDyer.setFillerColor(fillerColor);
+            shapeDyer.setBorderColor(borderColor);
+            shapeDyer.dye();
         }
     }
 
-    public static void clearShapes(Shape... shapes) {
+    public static void clearShapes(ShapeCleaner shapeCleaner, Shape... shapes) {
         for (Shape shape : shapes) {
-            shape.clear();
+            shapeCleaner.clear(shape);
         }
     }
 }
