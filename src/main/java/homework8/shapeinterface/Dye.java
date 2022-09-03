@@ -1,11 +1,15 @@
 package homework8.shapeinterface;
 
-public interface Dye {
-    String DEFAULT_COLOR = "white";
+import homework8.abstractclasses.Shape;
 
-    default String dye() {
-        return " is dyed in a default " + DEFAULT_COLOR + " color";
+public interface Dye {
+    String DEFAULT_FILLER_COLOR = "white";
+    String DEFAULT_BORDER_COLOR = "black";
+
+    default String dye(Shape shape){
+        return String.format("%s is dyed in a default %s color with %s border",
+                shape.getName(), DEFAULT_FILLER_COLOR, DEFAULT_BORDER_COLOR);
     }
 
-    void dye(String color);
+    void dye();
 }

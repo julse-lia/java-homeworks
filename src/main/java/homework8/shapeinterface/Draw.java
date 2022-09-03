@@ -1,5 +1,7 @@
 package homework8.shapeinterface;
 
-public interface Draw {
-    void draw();
+import homework8.abstractclasses.Shape;
+
+public interface Draw{
+    void draw(Shape shape);
 }
