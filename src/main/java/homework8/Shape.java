@@ -1,4 +1,4 @@
-package homework8.abstractclasses;
+package homework8;
 
 public abstract class Shape {
     protected String name;
