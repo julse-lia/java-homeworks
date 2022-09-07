@@ -1,6 +1,5 @@
 package homework8;
 
-
 public class ShapeCleaner implements Clear {
 
     @Override

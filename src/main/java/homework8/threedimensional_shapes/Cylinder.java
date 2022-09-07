@@ -1,4 +1,4 @@
-package homework8;
+package homework8.threedimensional_shapes;
 
 import homework8.InappropriateParameterException;
 import homework8.ThreeDimensional;

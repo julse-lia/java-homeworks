@@ -1,11 +1,11 @@
-package homework8;
+package homework8.twodimensional_shapes;
 
 import homework8.InappropriateParameterException;
 import homework8.TwoDimensional;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Quad extends TwoDimensional {
+public class Rectangle extends TwoDimensional {
     @Getter
     @Setter
     private int length;
@@ -13,18 +13,19 @@ public class Quad extends TwoDimensional {
     @Setter
     private int width;
 
-    public Quad(String name, int length, int width) throws InappropriateParameterException {
+    public Rectangle(String name, int length, int width) throws InappropriateParameterException {
         super(name);
-        if (length != width | length <= 0 | width <= 0) {
-            throw new InappropriateParameterException("Height and width of the quad must be equal and positive");
+        if (length <= 0 | width <= 0) {
+            throw new InappropriateParameterException("Height and width of the rectangle must be positive");
         }
         this.length = length;
         this.width = width;
+
     }
 
     @Override
     public String toString() {
-        return "Quad{" + "length=" + length +
+        return "Rectangle{" + "length=" + length +
                 ", width=" + width +
                 ", name='" + name + '\'' + "} ";
     }
