@@ -1,5 +1,9 @@
 package homework8;
 
+import homework8.threedimensional_shapes.Cube;
+import homework8.threedimensional_shapes.Cylinder;
+import homework8.twodimensional_shapes.*;
+
 public class GraphicRedactor {
     public static void main(String[] args) {
         Shape circle;
