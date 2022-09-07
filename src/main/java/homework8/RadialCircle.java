@@ -1,6 +1,5 @@
-package homework8.twodimensional_shapes;
+package homework8;
 
-import homework8.InappropriateParameterException;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,10 +1,5 @@
 package homework8;
 
-import homework8.abstractclasses.Shape;
-import homework8.threedimensional_shapes.Cube;
-import homework8.threedimensional_shapes.Cylinder;
-import homework8.twodimensional_shapes.*;
-
 public class GraphicRedactor {
     public static void main(String[] args) {
         Shape circle;
@@ -46,8 +41,6 @@ public class GraphicRedactor {
 
         System.out.println("---------------------");
 
-        System.out.println(shapeDyer.dye(circle));
-
         dyeShapes(shapeDyer, "blue", "red", quad, triangle);
 
         dyeShapes(shapeDyer, "yellow", "green", rectangle, trapeze, cube);
@@ -76,10 +69,9 @@ public class GraphicRedactor {
 
     public static void dyeShapes(ShapeDyer shapeDyer, String fillerColor, String borderColor, Shape... shapes) {
         for (Shape shape : shapes) {
-            shapeDyer.setShape(shape);
             shapeDyer.setFillerColor(fillerColor);
             shapeDyer.setBorderColor(borderColor);
-            shapeDyer.dye();
+            shapeDyer.dye(shape);
         }
     }
 

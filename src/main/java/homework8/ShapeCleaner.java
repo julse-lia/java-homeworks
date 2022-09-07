@@ -1,9 +1,6 @@
 package homework8;
 
 
-import homework8.abstractclasses.Shape;
-import homework8.shapeinterface.Clear;
-
 public class ShapeCleaner implements Clear {
 
     @Override
