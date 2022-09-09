@@ -1,4 +1,6 @@
-package homework8;
+package homework8.twodimensional_shapes;
+
+import homework8.Shape;
 
 public abstract class TwoDimensional extends Shape {
 
