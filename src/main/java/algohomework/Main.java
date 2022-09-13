@@ -55,7 +55,7 @@ public class Main {
         }
 
         // 3. Find amount of people with the same weight but different height(without set usage).
-        // Time complexity - O(n^2)
+        // Time complexity - O(n)
         int uniquePeopleCount = countWeightHeightUniquePeople(people, weightAndHeightComparator, weightComparator, heightComparator);
         System.out.println("\nAmount of people with the same weight but different height: " + uniquePeopleCount);
     }
