@@ -45,7 +45,7 @@ public class Main {
         long m = (long)Math.pow(2, 48);
 
         Stream.iterate(new long[]{seed}, n -> new long[]{(a*n[0] + c)%m})
-                .limit(20)
+//                .limit(20)
                 .map(n -> n[0])
                 .forEach(System.out::println);
 
