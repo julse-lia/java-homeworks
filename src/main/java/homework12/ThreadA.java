@@ -13,6 +13,5 @@ public class ThreadA extends AbstractThread {
         if (FizzBuzz.fizz(number)){
             queue.add("fizz");
         }
-
     }
 }

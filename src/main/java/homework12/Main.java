@@ -11,15 +11,22 @@ public class Main {
 
         for (int i = 1; i < 16; i++) {
             Thread d = new Thread(new ThreadD(q, i));
-            try {
-                ExecutorService pool = Executors.newFixedThreadPool(3);
-                pool.execute(new ThreadA(q, i));
-                pool.execute(new ThreadB(q, i));
-                pool.execute(new ThreadC(q, i));
-                pool.shutdown();
-            } catch (Exception err) {
-                err.printStackTrace();
-                return;
+
+            try{
+                Thread a = new Thread(new ThreadA(q, i));
+                Thread b = new Thread(new ThreadB(q, i));
+                Thread c = new Thread(new ThreadC(q, i));
+
+                a.start();
+                b.start();
+                c.start();
+
+                a.join();
+                b.join();
+                c.join();
+            }
+            catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
 
             d.start();
