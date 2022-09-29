@@ -13,7 +13,6 @@ public class MyStack<E> {
     MyStack() {
     }
 
-    // Pushes an item onto the top of this stack.
     public void push(E value)  {
         Node<E> newNode = new Node<E>();
         newNode.value = value;
@@ -22,8 +21,6 @@ public class MyStack<E> {
         size++;
     }
 
-    // Looks at the object at the top of this stack
-    // without removing it from the stack.
     public E peek(){
         if(top == null){
             throw new EmptyStackException();
@@ -31,8 +28,6 @@ public class MyStack<E> {
         return top.value;
     }
 
-    // Removes the object at the top of this stack and
-    // returns that object as the value of this function.
     public E pop(){
         if(top == null){
             throw new EmptyStackException();
@@ -43,26 +38,15 @@ public class MyStack<E> {
         return topValue;
     }
 
-    // Removes all the elements from this stack.
     public void clear()  {
-        Node<E> current = top;
-        while (current != null) {
-            Node<E> next = current.link;
-            current.value = null;
-            current.link = null;
-            current = next;
-        }
-
         top = null;
         size = 0;
     }
 
-    // Returns the number of elements in this stack.
     public int size(){
         return size;
     }
 
-    // Removes the element at the specified position in this stack.
     public E remove(int index) {
         if (index < 0 | index >= size){
             throw new IndexOutOfBoundsException();
