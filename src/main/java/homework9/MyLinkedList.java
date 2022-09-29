@@ -1,5 +1,7 @@
 package homework9;
 
+import java.util.Objects;
+
 public class MyLinkedList<E> {
     private Node<E> first;
     private Node<E> last;
@@ -20,7 +22,6 @@ public class MyLinkedList<E> {
     public MyLinkedList(){
     }
 
-    // Appends the specified element to the end of this list.
     public void add(E element) {
         if (first == null) {
             Node<E> newNode = new Node<>(null, element, null);
@@ -41,11 +42,8 @@ public class MyLinkedList<E> {
         }
     }
 
-    // Search node in the list by its index.
     public Node<E> searchNode(int index) {
-        if (index >= size | index < 0){
-            throw new IndexOutOfBoundsException("Node with this index is not present in the list");
-        }
+        Objects.checkIndex(index, size);
         Node<E> currentNode = first;
         int k = 0;
         while (k < index){
@@ -57,9 +55,6 @@ public class MyLinkedList<E> {
 
     }
 
-    //Removes the element at the specified position in this list.
-    // Shifts any subsequent elements to the left (subtracts one from their indices).
-    // Returns the element that was removed from the list.
     public E remove(int index) {
         Node<E> toRemove = searchNode(index);
         E element = toRemove.item;
@@ -87,27 +82,15 @@ public class MyLinkedList<E> {
         return element;
     }
 
-    // Returns the element at the specified position in this list.
     public E get(int index) {
         return searchNode(index).item;
     }
 
-    //Removes all the elements from this list.
     public void clear(){
-        Node<E> current = first;
-        while (current != null) {
-            Node<E> next = current.next;
-            current.item = null;
-            current.prev = null;
-            current.next = null;
-            current = next;
-        }
-
         first = last = null;
         size = 0;
     }
 
-    // Returns the number of elements in this list.
     public int size() {
         return size;
     }
