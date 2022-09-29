@@ -1,5 +1,8 @@
 package homework9;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class MyHashMap<K, V> {
     private class Node<K, V>{
         private K key;
@@ -35,20 +38,60 @@ public class MyHashMap<K, V> {
         }
     }
 
-    private final int ARRAY_LENGTH = 16;
+    private int arrayLength = 16;
     private int size;
+
+    private final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     private Node<K, V> table[];
 
     public MyHashMap() {
-        table = new Node[ARRAY_LENGTH];
+        table = new Node[arrayLength];
         size = 0;
     }
 
-    // Associates the specified value with the specified key in this map.
-    // If the map previously contained a mapping for the key, the old value is replaced.
+    public int getHash(K key) {
+        return (Objects.isNull(key)) ? 0 : key.hashCode() % arrayLength;
+    }
+
+    public void grow(){
+        float threshold = arrayLength * DEFAULT_LOAD_FACTOR;
+        if ((size + 1) >= threshold) {
+            arrayLength = arrayLength * 2;
+            Node<K, V>[] newTable = new Node[arrayLength];
+            for (Node<K, V> node : table){
+                if (Objects.nonNull(node)){
+                    Node<K, V> headNode = node;
+                    if (Objects.nonNull(node.next)){
+                        Node<K,V> cur = node.next;
+                        while (cur != null){
+                            int hashNext = getHash((K)cur.getKey());
+                            if (Objects.isNull(newTable[hashNext])){
+                                newTable[hashNext] = cur;
+                            }
+                            else {
+                                newTable[hashNext].next = cur;
+                            }
+                            cur = cur.next;
+                        }
+                    }
+                    int hash = getHash(headNode.getKey());
+                    if (Objects.isNull(newTable[hash])){
+                        newTable[hash] = headNode;
+                    }
+                    else {
+                        newTable[hash].next = headNode;
+                    }
+                    headNode.next = null;
+                }
+            }
+            table = newTable;
+        }
+    }
+
     public V put(K key, V value){
-        int hash = key.hashCode() % ARRAY_LENGTH;
+        grow();
+        int hash = getHash(key);
         Node<K, V> e = table[hash];
 
         if (e == null){
@@ -77,10 +120,8 @@ public class MyHashMap<K, V> {
         return null;
     }
 
-    // Returns the value to which the specified key is mapped,
-    // or null if this map contains no mapping for the key.
     public V get(K key){
-        int hash = key.hashCode() % ARRAY_LENGTH;
+        int hash = getHash(key);
         Node<K, V> e = table[hash];
 
         if (e == null){
@@ -98,28 +139,13 @@ public class MyHashMap<K, V> {
         return null;
     }
 
-    // Removes all the mappings from this map.
     public void clear() {
-        for (int i = 0; i < ARRAY_LENGTH; i++){
-            Node<K, V> temp;
-            Node<K, V> start = table[i];
-
-            if(start == null){
-                continue;
-            }
-            while (start != null){
-                temp = start.next;
-                start.next = null;
-                start = temp;
-            }
-            table[i] = start;
-        }
+        Arrays.fill(table, null);
         size = 0;
     }
 
-    // Removes the mapping for the specified key from this map if present.
     public V remove(K key){
-        int hash = key.hashCode() % ARRAY_LENGTH;
+        int hash = getHash(key);
         Node<K, V> e = table[hash];
 
         if (e == null){
@@ -150,17 +176,14 @@ public class MyHashMap<K, V> {
         return null;
     }
 
-    // Returns the number of key-value mappings in this map.
     public int size() {
         return size;
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < ARRAY_LENGTH; i++){
+        for (int i = 0; i < arrayLength; i++){
             if (table[i] != null) {
                 stringBuilder.append(i + " " + table[i] + "\n");
             }
