@@ -17,7 +17,6 @@ public class MyQueue<E>{
     public MyQueue(){
     }
 
-    // Appends the specified element to the end of the queue.
     public void add(E element) {
         if (element == null) {
             throw new NullPointerException();
@@ -41,7 +40,6 @@ public class MyQueue<E>{
         }
     }
 
-    //Removes specified element from the queue.
     public boolean remove(E e) {
         Node<E> current = head;
         if (current.item.equals(e)){
@@ -61,32 +59,19 @@ public class MyQueue<E>{
         return false;
     }
 
-    // Removes all the elements from this queue.
     public void clear(){
-        Node<E> current = head;
-        for (int i = 0; i < size; i++){
-            Node<E> next = current.next;
-            current.item = null;
-            current.next = null;
-            current = next;
-        }
         head = tail = null;
         size = 0;
     }
 
-    // Returns the number of elements in this queue.
     public int size(){
         return size;
     }
 
-    // Retrieves, but does not remove, the head of this queue,
-    // or returns null if this queue is empty.
     public E peek(){
         return head.item;
     }
 
-    // Retrieves and removes the head of this queue,
-    // or returns null if this queue is empty.
     public E poll(){
         if (head == null){
             return null;
